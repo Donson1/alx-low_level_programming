@@ -15,3 +15,4 @@ if (alpha == 'z')
 putchar('\n');
 }
 return (0);
+}
