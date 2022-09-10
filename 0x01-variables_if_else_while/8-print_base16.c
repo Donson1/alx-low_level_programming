@@ -6,15 +6,15 @@
 */
 int main(void)
 {
-char alpha10 = a;
+char alpha = 'a';
 int num = 48;
 
-for (; alpha10 <= 'f'; alpha10++)
+for (; alpha <= 'f'; alpha++)
 {
 for (; num < 58; num++)
 putchar(num);
-putchar(alpha10);
-if (alpha10 == 'f')
+putchar(alpha);
+if (alpha == 'f')
 putchar('\n');
 }
 return (0);
