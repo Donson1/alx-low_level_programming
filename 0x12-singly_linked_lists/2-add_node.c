@@ -3,49 +3,46 @@
 #include "lists.h"
 
 /**
-  * add_node - Adds a new node at the beginning of a list
-  * @head: The original linked list
-  * @str: The string to add to the node
-  *
-  * Return: The address of the new list or NULL if it failed
-  */
+ * add_node - adds a node to a list_t list
+ *
+ * @head: node to add a node after
+ * @str: str to put into struct
+ *
+ * Return: address of new element
+ */
 list_t *add_node(list_t **head, const char *str)
 {
-	list_t *temp;
+	char *newstr, *ptr;
+	list_t *newnode;
+	int len = 0;
 
-	if (head != NULL && str != NULL)
+	if (str != NULL)
 	{
-		temp = malloc(sizeof(list_t));
-		if (temp == NULL)
+		ptr = (char *) str;
+		while (*ptr++)
+			len++;
+		newstr = malloc(sizeof(char) * (len + 1));
+		if (newstr == NULL)
 			return (NULL);
 
-		temp->str = strdup(str);
-		temp->len = _strlen(str);
-		temp->next = *head;
-
-		*head = temp;
-
-		return (temp);
+		ptr = newstr;
+		while (*str)
+			*ptr++ = *str++;
 	}
+	else
+		newstr = NULL;
 
-	return (0);
-}
-
-/**
-  * _strlen - Returns the length of a string
-  * @s: String to count
-  *
-  * Return: String length
-  */
-int _strlen(const char *s)
-{
-	int c = 0;
-
-	while (*s)
+	newnode = malloc(sizeof(list_t));
+	if (newnode == NULL)
 	{
-		s++;
-		c++;
+		free(newstr);
+		return (NULL);
 	}
 
-	return (c);
+	if (*head != NULL)
+		newnode->next = *head;
+	newnode->str = newstr;
+	newnode->len = len;
+	*head = newnode;
+	return (newnode);
 }
